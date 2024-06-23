@@ -1,0 +1,8 @@
+<rules>
+    <rule name="DontUseDoubleSlashOperatorNearRoot">
+        <message>Avoid using the operator // near the root of a large tree</message>
+        <xpath>//(@match | @select)[starts-with(., '//')]</xpath>
+        <priority>2</priority>
+    </rule>
+    <!-- Add other rules -->
+</rules>
