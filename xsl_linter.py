@@ -2,6 +2,7 @@ import sys
 from lxml import etree
 from saxonpy import PySaxonProcessor
 
+
 def load_rules(rules_file):
     tree = etree.parse(rules_file)
     rules = tree.findall('.//rule')
@@ -10,6 +11,7 @@ def load_rules(rules_file):
         'xpath': rule.find('xpath').text,
         'priority': int(rule.find('priority').text)
     } for rule in rules}
+
 
 def lint_xslt(xslt_file, rules):
     with PySaxonProcessor(license=False) as proc:
@@ -23,9 +25,11 @@ def lint_xslt(xslt_file, rules):
                 for violation in violations:
                     print(f"  at {violation.node_name} line {violation.line_number}")
 
+
 def main(xslt_file, rules_file):
     rules = load_rules(rules_file)
     lint_xslt(xslt_file, rules)
+
 
 if __name__ == "__main__":
     if len(sys.argv) != 3:
